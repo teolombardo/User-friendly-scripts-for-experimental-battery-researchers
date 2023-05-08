@@ -75,8 +75,8 @@ for line in lines:
         else:
             splitted_line = line.split("	")
             if "total" not in splitted_line:
-                Lower_mass = float(splitted_line[Lower_mass_n])
-                Upper_mass = float(splitted_line[Upper_mass_n])
+                Lower_mass = float(splitted_line[Lower_mass_n].replace(",","."))
+                Upper_mass = float(splitted_line[Upper_mass_n].replace(",","."))
                 Assignment = splitted_line[Assignment_n]
                 #Description = splitted_line[Description_n]
                 ranges[Assignment] = [Lower_mass, Upper_mass]
@@ -158,6 +158,11 @@ if previous >= 0:
 
     df_all_norm["label"] = labels
 
+# Local scaling peak by peak
+for i in df_all_norm:
+    if i != "label":
+        df_all_norm[i] = df_all_norm[i] / float(max(df_all_norm[i]))
+
 # Perform PCA
 PCA_model = PCA(n_components=components_num)
 X = df_all_norm.drop('label', axis=1)
@@ -228,19 +233,14 @@ def rec_mz(PCname):
     PC.to_csv(csv_save, index=False)
     return PC
 
-#PC1 = rec_mz("PC1")
-#if len(exp_var_pca) > 1:
-#    PC2 = rec_mz("PC2")
-#if len(exp_var_pca) > 2:
-#    PC3 = rec_mz("PC3")
-#if len(exp_var_pca) > 3:
-#    PC4 = rec_mz("PC4")
 
 PC1 = rec_mz("PC1")
-for i in range(1, 100):
-    name_PC = "PC" + str(i+1)
-    if len(exp_var_pca) > i:
-        PCi = rec_mz(name_PC)
+if len(exp_var_pca) > 1:
+    PC2 = rec_mz("PC2")
+if len(exp_var_pca) > 2:
+    PC3 = rec_mz("PC3")
+if len(exp_var_pca) > 3:
+    PC4 = rec_mz("PC4")
 
 # Recovery of the loadings
 loadings = pd.DataFrame(PCA_model.components_.T, columns=PC_list)
