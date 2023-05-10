@@ -500,6 +500,10 @@ plt.yticks(fontsize=22)
 ax2.set_ylim([-0, 1])
 plt.show()
 
+# Saving PC values
+csv_save = directory_res + "\\" + "PCs values.csv"
+PCA_res_df.to_csv(csv_save, index=False)
+
 # Define minimal and maximal value for PC1 and PC2
 min1 = min(PCA_res_df["PC1"])
 max1 = max(PCA_res_df["PC1"])
