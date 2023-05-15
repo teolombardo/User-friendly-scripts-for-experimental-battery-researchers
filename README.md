@@ -1,3 +1,5 @@
+# User-friendly Scripts for Experimental Battery Researachers
+
 Here you can find a series of codes made for battery researchers that are not experts on coding and that can be useful to save time and get the maximum out of your data.
 These codes can be used either for analyzing your electrochemical data (cycle life or rate capability tests), your (FIB-)SEM images (for both electrodes and powders), and your Time-of-Flight Seconday-Ion-Masss-Spectrometry data.
 
